@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,10 +19,14 @@ public class JavaAPIProject {
 	
 	private static final int CONNECTION_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(15);
 	private static final int READ_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(15);
+	private static String kanyeThoughts = null;
 
 	public static void main(String[] args) {
 	    String address = "https://api.kanye.rest";
-	    System.out.println(get(address));
+	    kanyeThoughts = get(address);
+	    System.out.println(kanyeThoughts);
+	    System.out.println(reverseText(kanyeThoughts));
+	    arrayBuilder(kanyeThoughts);
 	}
 
 	public static String get(String address) {
@@ -69,5 +74,29 @@ public class JavaAPIProject {
 	    }
 	    return result;
 	}
+	
+	public static String reverseText(String stringIn) {
+		String output = "";
+		for (int i = stringIn.length() - 3; i >= 10; i--) {
+			output += stringIn.charAt(i);
+		}
+		return output;
+	}
+	
+	public static void arrayBuilder(String stringIn) {
+		ArrayList<String> stringArray = new ArrayList<String>();
+		int j = 10;
+		for (int i = 10; i < stringIn.length(); i++) {
+			if (stringIn.charAt(i) == ' '|| stringIn.charAt(i) == '"') {
+				stringArray.add(stringIn.substring(j, i));
+				j = i + 1;
+			}
+		}
+		for (String s : stringArray) {
+			System.out.println(s);
+		}
+	}
+	
+
 	
 }
