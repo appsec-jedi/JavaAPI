@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Java project to practice with text files
+ * Java project to practice with APIs
  *
  * @author     Jake Jacobs-Smith (jacobjv@auburn.edu)
  * @version    2021-1-1
@@ -26,7 +26,8 @@ public class JavaAPIProject {
 	    kanyeThoughts = get(address);
 	    System.out.println(kanyeThoughts);
 	    System.out.println(reverseText(kanyeThoughts));
-	    arrayBuilder(kanyeThoughts);
+	    System.out.println(arrayBuilder(kanyeThoughts));
+	    System.out.println(pigLatinTranslator(kanyeThoughts));
 	}
 
 	public static String get(String address) {
@@ -83,7 +84,7 @@ public class JavaAPIProject {
 		return output;
 	}
 	
-	public static void arrayBuilder(String stringIn) {
+	public static ArrayList<String> arrayBuilder(String stringIn) {
 		ArrayList<String> stringArray = new ArrayList<String>();
 		int j = 10;
 		for (int i = 10; i < stringIn.length(); i++) {
@@ -92,11 +93,28 @@ public class JavaAPIProject {
 				j = i + 1;
 			}
 		}
-		for (String s : stringArray) {
-			System.out.println(s);
-		}
+		return stringArray;
 	}
 	
-
+	public static String pigLatinTranslator(String stringIn) {
+		String output = "";
+		ArrayList<String> stringArray = arrayBuilder(stringIn);
+		for (String word : stringArray) {
+			char check = word.charAt(0);
+			if (check == 'a' || check == 'e' || check == 'i' || check == 'o' || check == 'u' || check == 'y') {
+				output += word + "-yay ";
+			} else {
+				check = word.charAt(1);
+				if (check == 'a' || check == 'e' || check == 'i' || check == 'o' || check == 'u' || check == 'y') {
+					output += word.substring(1);
+					output += "-" + word.charAt(0) + "ay ";
+				} else {
+					output += word.substring(2);
+					output += "-" + word.charAt(0) + word.charAt(1) + "ay ";
+				} 
+			}
+		}
+		return output;
+	}
 	
 }
