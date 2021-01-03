@@ -100,11 +100,14 @@ public class JavaAPIProject {
 		String output = "";
 		ArrayList<String> stringArray = arrayBuilder(stringIn);
 		for (String word : stringArray) {
-			char check = word.charAt(0);
+			if (word.contains(".") || word.contains(",") || word.contains("'")) {
+				//to-do
+			}
+			char check = word.toLowerCase().charAt(0);
 			if (check == 'a' || check == 'e' || check == 'i' || check == 'o' || check == 'u' || check == 'y') {
 				output += word + "-yay ";
 			} else {
-				check = word.charAt(1);
+				check = word.toLowerCase().charAt(1);
 				if (check == 'a' || check == 'e' || check == 'i' || check == 'o' || check == 'u' || check == 'y') {
 					output += word.substring(1);
 					output += "-" + word.charAt(0) + "ay ";
